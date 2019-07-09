@@ -132,6 +132,7 @@ The purpose of this project is to take a baseline installation of Linux on a vir
     * Restart Apache service: ```sudo service apache2 restart```
 
 ## File Structure
+```
 ── FlaskApp
    ├── FlaskApp
    │   ├── client_secrets.json
@@ -160,6 +161,7 @@ The purpose of this project is to take a baseline installation of Linux on a vir
    │       ├── include
    │       └── lib
    └── flaskapp.wsgi
+```
 
 ## Third Party Resources
 * [How to Secure PostgreSQL on an Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps)
