@@ -18,9 +18,18 @@ The purpose of this project is to take a baseline installation of Linux on a vir
 
 ## Configurations Made
 
-1. Ensure currently installed packages are up-to-date
+1. Ensure currently installed packages are up-to-date and automatically update once a day
     * SSH into server using Amazon's browser SSH client (alternatively download Amazon's default private key and use SSH client of choice)
     * Update all currently installed packages: ```sudo apt-get update``` ```sudo apt-get upgrade```
+    * Install unattended-upgrades package: ```sudo apt install unattended-upgrades```
+    * Uncomment ```"${distro_id}:${distro_codename}-updates";``` from ```/etc/apt/apt.conf.d/50unattended-upgrades```
+    * Edit ```/etc/apt/apt.conf.d/20auto-upgrades``` to the following config options:
+         ```
+         APT::Periodic::Update-Package-Lists "1";
+         APT::Periodic::Download-Upgradeable-Packages "1";
+         APT::Periodic::AutocleanInterval "7";
+         APT::Periodic::Unattended-Upgrade "1";
+         ```
 2. Setup *grader* User
     * Create *grader*: ```sudo adduser grader```
     * Give *grader* sudo privileges: ```vi /etc/sudoers.d/grader``` and add ```grader ALL=(ALL:ALL) ALL`` to the newly created file
@@ -122,6 +131,35 @@ The purpose of this project is to take a baseline installation of Linux on a vir
         ```
     * Restart Apache service: ```sudo service apache2 restart```
 
+## File Structure
+── FlaskApp
+   ├── FlaskApp
+   │   ├── client_secrets.json
+   │   ├── database_setup.py
+   │   ├── initialevents.py
+   │   ├── __init__.py
+   │   ├── __pycache__
+   │   │   └── database_setup.cpython-35.pyc
+   │   ├── README.md
+   │   ├── static
+   │   │   └── styles.css
+   │   ├── templates
+   │   │   ├── deleteEvent.html
+   │   │   ├── deleteVolunteer.html
+   │   │   ├── editEvent.html
+   │   │   ├── editVolunteer.html
+   │   │   ├── events.html
+   │   │   ├── header.html
+   │   │   ├── login.html
+   │   │   ├── main.html
+   │   │   ├── newEvent.html
+   │   │   ├── newVolunteer.html
+   │   │   └── volunteers.html
+   │   └── venv3
+   │       ├── bin
+   │       ├── include
+   │       └── lib
+   └── flaskapp.wsgi
 
 ## Third Party Resources
 * [How to Secure PostgreSQL on an Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps)
